@@ -1,5 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
+.flattened-pom.xml
+target
 ### Java template
 # Compiled class file
 *.class
