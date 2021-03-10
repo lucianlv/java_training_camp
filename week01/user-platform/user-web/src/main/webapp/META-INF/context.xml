@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+  <Resource name="jdbc/UserPlatformDB"
+    type="javax.sql.DataSource"  auth="Container"
+    description="H2 database for User Platform"
+    maxActive="100" maxIdle="30" maxWait="10000"
+    username="" password=""
+    driverClassName="org.h2.Driver"
+    url="jdbc:h2:mem:mvc;DB_CLOSE_DELAY=-1"/>
+
+
+</Context>
