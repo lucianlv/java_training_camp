@@ -277,6 +277,7 @@ public class DelegatingEntityManager implements EntityManager {
 
     @Override
     public void close() {
+
         entityManager.close();
     }
 

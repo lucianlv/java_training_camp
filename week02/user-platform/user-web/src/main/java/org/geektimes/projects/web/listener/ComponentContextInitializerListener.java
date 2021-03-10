@@ -5,6 +5,7 @@ import org.geektimes.context.ComponentContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import org.geektimes.projects.sql.DBConnectionManager;
 
 /**
  * {@link ComponentContext} 初始化器
@@ -19,6 +20,9 @@ public class ComponentContextInitializerListener implements ServletContextListen
         this.servletContext = sce.getServletContext();
         ComponentContext context = new ComponentContext();
         context.init(servletContext);
+
+        DBConnectionManager dbConnectionManager = context.getComponent("bean/DBConnectionManager");
+        dbConnectionManager.createTable();
     }
 
     @Override

@@ -60,6 +60,21 @@ public class DBConnectionManager { // JNDI Component
         return connection;
     }
 
+    public boolean createTable() {
+        Connection connection = getConnection();
+        boolean res = false;
+        try {
+            Statement statement = connection.createStatement();
+            res = statement.execute(CREATE_USERS_TABLE_DDL_SQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        logger.log(Level.INFO, "成功创建临时的 users 表!");
+        return res;
+    }
+
 
 //    private Connection connection;
 //
@@ -84,11 +99,13 @@ public class DBConnectionManager { // JNDI Component
     public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";
 
     public static final String CREATE_USERS_TABLE_DDL_SQL = "CREATE TABLE users(" +
-        "id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
+        "id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
         "name VARCHAR(16) NOT NULL, " +
         "password VARCHAR(64) NOT NULL, " +
         "email VARCHAR(64) NOT NULL, " +
-        "phoneNumber VARCHAR(64) NOT NULL" +
+        "phoneNumber VARCHAR(64) NOT NULL, " +
+        "UNIQUE (name)," +
+        "UNIQUE (email)" +
         ")";
 
     public static final String INSERT_USER_DML_SQL = "INSERT INTO users(name,password,email,phoneNumber) VALUES " +
