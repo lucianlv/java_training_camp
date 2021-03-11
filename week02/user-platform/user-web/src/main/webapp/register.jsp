@@ -12,25 +12,25 @@
         <div class="form-group row">
             <label class="col-sm-1 col-form-label">用户名</label>
             <dev class="col-sm-4">
-                <input type="text" class="form-control" name="username" required autofocus>
+                <input type="text" class="form-control" name="username" placeholder="请输入用户名" required autofocus>
             </dev>
         </div>
         <div class="form-group row">
             <label class="col-sm-1 col-form-label">邮箱</label>
             <dev class="col-sm-4">
-                <input type="email" class="form-control" name="email" required>
+                <input type="email" class="form-control" name="email" placeholder="请输入合法的邮箱地址" required>
             </dev>
         </div>
         <div class="form-group row">
             <label class="col-sm-1 col-form-label">手机号码</label>
             <dev class="col-sm-4">
-                <input type="text" class="form-control" name="phone" required>
+                <input type="text" class="form-control" name="phone" placeholder="请输入11位手机号" required>
             </dev>
         </div>
         <div class="form-group row">
             <label class="col-sm-1 col-form-label">密码</label>
             <dev class="col-sm-4">
-                <input type="password" class="form-control" name="password" required>
+                <input type="password" class="form-control" name="password" placeholder="请输入6-32位密码" required>
             </dev>
         </div>
         <div class="form-group">

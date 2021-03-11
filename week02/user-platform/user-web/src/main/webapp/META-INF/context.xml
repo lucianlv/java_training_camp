@@ -45,5 +45,9 @@
     type="org.geektimes.projects.service.impl.UserServiceImpl"
     factory="org.apache.naming.factory.BeanFactory" />
 
+  <Resource name="bean/Validator" auth="Container"
+    type="org.geektimes.projects.validator.bean.validation.DelegatingValidator"
+    factory="org.apache.naming.factory.BeanFactory" />
+
 
 </Context>

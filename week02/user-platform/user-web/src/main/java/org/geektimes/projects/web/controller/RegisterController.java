@@ -35,7 +35,7 @@ public class RegisterController implements PageController {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
 
-            User user = new User(null, username, password, email, phone);
+            User user = new User(0L, username, password, email, phone);
 
             if (!userService.register(user)) {
                 request.setAttribute("err_msg", "注册失败");

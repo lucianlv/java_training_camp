@@ -7,11 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import org.geektimes.projects.validator.bean.validation.UserValid;
 
 
 @Entity
 @Table(name="users")
+@UserValid(passwordMinLen = 6, passwordMaxLen = 32, phoneNumberLen = 11)
 public class User implements Serializable {
 
     @Id
