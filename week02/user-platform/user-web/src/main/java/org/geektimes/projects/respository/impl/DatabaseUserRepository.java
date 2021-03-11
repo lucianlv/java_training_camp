@@ -67,6 +67,28 @@ public class DatabaseUserRepository implements UserRepository {
 
     @Override
     public User getByEmailAndPassword(String email, String password) {
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                QUERY_ALL_USERS_DML_SQL + " WHERE email=? AND password=?");
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getLong("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setPhoneNumber(resultSet.getString("phoneNumber"));
+                return user;
+            }
+        } catch (Throwable e) {
+            logger.log(Level.SEVERE, e.getMessage());
+            throw new RuntimeException(e.getCause());
+        }
+
         return null;
     }
 

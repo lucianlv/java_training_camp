@@ -6,6 +6,6 @@
 <body>
 <div class="container-lg">
     <!-- Content here -->
-    <h1>登录成功！</h1>
+    <h1>登录成功！${loginUser.name} 欢迎您！</h1>
 </div>
 </body>

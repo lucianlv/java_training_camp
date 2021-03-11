@@ -1,2 +1,3 @@
 org.geektimes.projects.web.controller.HomeController
 org.geektimes.projects.web.controller.RegisterController
+org.geektimes.projects.web.controller.LoginController

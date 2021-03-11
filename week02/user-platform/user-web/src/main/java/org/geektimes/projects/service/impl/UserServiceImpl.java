@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
 
 //        return true;
     }
+
+    @Override
+    public User login(User user) {
+        return userRepository.getByEmailAndPassword(user.getEmail(), user.getPassword());
+    }
 }

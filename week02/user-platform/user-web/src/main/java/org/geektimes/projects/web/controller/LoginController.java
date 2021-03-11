@@ -1,9 +1,6 @@
 package org.geektimes.projects.web.controller;
 
-import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
@@ -11,14 +8,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import org.geektimes.projects.domain.User;
 import org.geektimes.projects.service.UserService;
-import org.geektimes.projects.service.impl.UserServiceImpl;
-import org.geektimes.projects.sql.DBConnectionManager;
 import org.geektimes.web.mvc.controller.PageController;
 
-@Path("/register")
-public class RegisterController implements PageController {
-
-    private Logger logger = Logger.getLogger(RegisterController.class.getName());
+@Path("/login")
+public class LoginController implements PageController {
 
     @Resource(name = "bean/UserService")
     private UserService userService;
@@ -30,21 +23,23 @@ public class RegisterController implements PageController {
         String method = request.getMethod();
 
         if ("POST" == method) {
-            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
 
-            User user = new User(null, username, password, email, phone);
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
 
-            if (!userService.register(user)) {
-                request.setAttribute("err_msg", "注册失败");
-                return "register.jsp";
+            User loginUser = userService.login(user);
+            if (null == loginUser) {
+                request.setAttribute("err_msg", "登录失败");
+                return "login.jsp";
+            } else {
+                request.setAttribute("loginUser", loginUser);
+                return "success.jsp";
             }
-
-            return "login.jsp";
         }
 
-        return "register.jsp";
+        return "login.jsp";
     }
 }
