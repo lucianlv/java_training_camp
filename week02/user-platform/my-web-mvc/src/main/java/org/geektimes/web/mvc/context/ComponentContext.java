@@ -1,7 +1,4 @@
-package org.geektimes.context;
-
-import org.geektimes.function.ThrowableAction;
-import org.geektimes.function.ThrowableFunction;
+package org.geektimes.web.mvc.context;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,6 +9,8 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+import org.geektimes.web.mvc.function.ThrowableAction;
+import org.geektimes.web.mvc.function.ThrowableFunction;
 
 /**
  * 组件上下文（Web 应用全局使用）
@@ -97,6 +96,7 @@ public class ComponentContext {
     }
 
     private void injectComponents(Object component, Class<?> componentClass) {
+
         Stream.of(componentClass.getDeclaredFields())
             .filter(field -> {
                 int mods = field.getModifiers();

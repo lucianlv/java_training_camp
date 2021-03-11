@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.geektimes.projects.domain.User;
 import org.geektimes.projects.service.UserService;
 import org.geektimes.projects.service.impl.UserServiceImpl;
+import org.geektimes.projects.sql.DBConnectionManager;
 import org.geektimes.web.mvc.controller.PageController;
 
 @Path("/register")
@@ -35,6 +36,11 @@ public class RegisterController implements PageController {
             String phone = request.getParameter("phone");
 
             User user = new User(null, username, password, email, phone);
+//            if (userService == null) {
+//                logger.info("aaaaaaaaaa");
+//            } else {
+//                logger.info("bbbbbbb");
+//            }
             userService.register(user);
 
 //            request.setAttribute("err_msg", "注册失败");

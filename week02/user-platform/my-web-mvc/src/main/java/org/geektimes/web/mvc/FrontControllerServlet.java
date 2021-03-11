@@ -6,11 +6,15 @@ import static org.apache.commons.lang.StringUtils.substringAfter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -21,11 +25,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.Path;
 import org.apache.commons.lang.StringUtils;
+import org.geektimes.web.mvc.context.ComponentContext;
 import org.geektimes.web.mvc.controller.Controller;
 import org.geektimes.web.mvc.controller.PageController;
 import org.geektimes.web.mvc.controller.RestController;
 
 public class FrontControllerServlet extends HttpServlet {
+
+    private Logger logger = Logger.getLogger(FrontControllerServlet.class.getName());
 
     /**
      * 请求路径和 Controller 的映射关系缓存
@@ -55,6 +62,22 @@ public class FrontControllerServlet extends HttpServlet {
             Path pathFromClass = controllerClass.getAnnotation(Path.class);
             String requestPath = pathFromClass.value();
             Method[] publicMethods = controllerClass.getMethods();
+
+            Stream.of(controllerClass.getDeclaredFields()).filter(field -> {
+                int mods = field.getModifiers();
+                return !Modifier.isStatic(mods) && field.isAnnotationPresent(Resource.class);
+            }).forEach(field -> {
+                Resource resource = field.getAnnotation(Resource.class);
+                String resourceName = resource.name();
+                Object injectedObject = ComponentContext.getInstance().getComponent(resourceName);
+                field.setAccessible(true);
+                try {
+                    field.set(controller, injectedObject);
+                } catch (IllegalAccessException e) {
+
+                }
+            });
+
             // 处理方法支持的 HTTP 方法集合
             for (Method method : publicMethods) {
                 Set<String> supportedHttpMethods = findSupportedHttpMethods(method);
