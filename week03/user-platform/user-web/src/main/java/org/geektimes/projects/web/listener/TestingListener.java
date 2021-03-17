@@ -7,6 +7,10 @@ import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
+import javax.servlet.ServletContext;
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
 import org.geektimes.projects.management.UserManager;
 import org.geektimes.web.mvc.context.ComponentContext;
 import org.geektimes.projects.domain.User;
@@ -31,6 +35,8 @@ public class TestingListener implements ServletContextListener {
         ComponentContext context = ComponentContext.getInstance();
         DBConnectionManager dbConnectionManager = context.getComponent("bean/DBConnectionManager");
         dbConnectionManager.getConnection();
+        testPropertyFromServletContext(sce.getServletContext());
+        testMicroprofileConfig();
 //        testUser(dbConnectionManager.getEntityManager());
         logger.info("所有的 JNDI 组件名称：[");
         context.getComponentNames().forEach(logger::info);
@@ -65,6 +71,20 @@ public class TestingListener implements ServletContextListener {
         // 创建 UserMBean 实例
         User user = new User();
         mBeanServer.registerMBean(new UserManager(user), objectName);
+    }
+
+    private void testPropertyFromServletContext(ServletContext servletContext) {
+        String propertyName = "application.name";
+        logger.info("ServletContext Property[" + propertyName + "] : "
+            + servletContext.getInitParameter(propertyName));
+    }
+
+    private void testMicroprofileConfig() {
+        ConfigProviderResolver provider = ConfigProviderResolver.instance();
+        Config config = provider.getConfig();
+        String appName = config.getValue("application.name", String.class);
+
+        logger.info("read custom properties: application.name = " + appName);
     }
 
     @Override
