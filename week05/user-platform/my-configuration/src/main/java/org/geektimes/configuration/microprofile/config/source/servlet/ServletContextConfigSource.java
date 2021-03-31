@@ -19,7 +19,6 @@ public class ServletContextConfigSource extends MapBasedConfigSource {
 
     @Override
     protected void prepareConfigData(Map configData) throws Throwable {
-
         Enumeration<String> parameterNames = servletContext.getInitParameterNames();
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();

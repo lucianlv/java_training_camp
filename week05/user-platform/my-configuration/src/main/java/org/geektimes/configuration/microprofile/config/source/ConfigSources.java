@@ -1,6 +1,5 @@
 package org.geektimes.configuration.microprofile.config.source;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 
 import java.util.Arrays;
@@ -74,7 +73,6 @@ public class ConfigSources implements Iterable<ConfigSource> {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new IllegalStateException(e);
         }
-
         return instance;
     }
 
