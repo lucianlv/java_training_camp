@@ -1,0 +1,15 @@
+github:
+  clientId: 9e430fe9ebc163a11c5f
+  clientSecret: df3f31f9e67997a64366f977ec1f8e72df0af1da
+  authorizeUrl: https://github.com/login/oauth/authorize
+  redirectUrl : http://localhost:8080/oauth2/callback
+  accessTokenUrl: https://github.com/login/oauth/access_token
+  userInfoUrl: https://api.github.com/user
+
+gitee:
+  clientId: 70cfa4148aa2cbff93432c47065bb251e37adb8f9d5807371daa04a4a00116cd
+  clientSecret: 02872e14db6c6fa137fda42ce3fa4ec426abb995634358bfd4e69aafdab79078
+  authorizeUrl: https://gitee.com/oauth/authorize
+  redirectUrl : http://localhost:8080/oauth2/callback
+  accessTokenUrl: https://gitee.com/oauth/token
+  userInfoUrl: https://gitee.com/api/v5/user
