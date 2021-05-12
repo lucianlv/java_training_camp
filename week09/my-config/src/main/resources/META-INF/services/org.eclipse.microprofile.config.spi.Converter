@@ -1,0 +1,11 @@
+pers.cocoadel.configuration.converters.BigDecimalConverter
+pers.cocoadel.configuration.converters.BigIntegerConverter
+pers.cocoadel.configuration.converters.BooleanConverter
+pers.cocoadel.configuration.converters.ByteConverter
+pers.cocoadel.configuration.converters.CharacterConverter
+pers.cocoadel.configuration.converters.DoubleConverter
+pers.cocoadel.configuration.converters.FloatConverter
+pers.cocoadel.configuration.converters.IntegerConverter
+pers.cocoadel.configuration.converters.LongConverter
+pers.cocoadel.configuration.converters.ShortConverter
+pers.cocoadel.configuration.converters.StringConverter

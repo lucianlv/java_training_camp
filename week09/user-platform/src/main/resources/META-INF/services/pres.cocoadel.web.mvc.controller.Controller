@@ -1,0 +1,5 @@
+pers.cocoadel.user.platform.web.controller.LoginController
+pers.cocoadel.user.platform.web.controller.RegisterController
+pers.cocoadel.user.platform.web.controller.HelloWorldController
+pers.cocoadel.user.platform.web.controller.OauthLoginController
+pers.cocoadel.user.platform.web.controller.OauthCallController
